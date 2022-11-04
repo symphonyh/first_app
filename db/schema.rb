@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20221101111338) do
+ActiveRecord::Schema.define(version: 20221104083403) do
+
+  create_table "followings", force: :cascade do |t|
+    t.integer "from_id"
+    t.integer "to_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["from_id", "to_id"], name: "index_followings_on_from_id_and_to_id", unique: true
+    t.index ["from_id"], name: "index_followings_on_from_id"
+    t.index ["to_id"], name: "index_followings_on_to_id"
+  end
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id"

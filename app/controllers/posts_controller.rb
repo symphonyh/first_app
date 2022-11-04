@@ -2,9 +2,14 @@ class PostsController < ApplicationController
   def new
   end
 
+  # def index
+	#	@posts = Post.all
+	#	@post = current_user.posts.build
+  #end
+
   def index
-		@posts = Post.all
-		@post = current_user.posts.build
+	@posts = Post.from_followed_users(current_user).order("created_at DESC")
+	@post = current_user.posts.build
   end
 
   def create
